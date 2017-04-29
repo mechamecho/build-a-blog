@@ -39,7 +39,7 @@ class Handler(webapp2.RequestHandler):
 class MainPage(Handler):
 
 	def get(self):
-		self.write("ascichan!")
+		self.render("font.html")
 
 
 app = webapp2.WSGIApplication([
