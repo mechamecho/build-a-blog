@@ -36,10 +36,15 @@ class Handler(webapp2.RequestHandler):
     	self.write(self.render_str(template, **kw))
 
 #creating an entity called post for the database
+# class Post(db.Model):
+# 	subject=db.StringProperty(required = True)
+# 	post=db.TextProperty(required = True)
+# 	created=db.DateTimeProperty(auto_now_add = True)
+
 class Post(db.Model):
-	subject=db.StringProperty(required = True)
-	post=db.TextProperty(required = True)
-	created=db.DateTimeProperty(auto_now_add = True)
+	subject=db.StringProperty(required=True)
+	post=db.TextProperty(required=True)
+	created=db.DateTimeProperty(auto_now_add=True)
 
 
 class MainPage(Handler):
@@ -82,17 +87,24 @@ class NewPostHandler(Handler):
 			self.render_newpost(subject, post, error)
 
 
-class ViewPostHandler(webapp2.RequestHandler):
-    def render_singlepost(self, subject="", post="", error=""):
-    	self.render("template.html",subject=subject, post=post, error=error)
+class ViewPostHandler(Handler):
+    def render_singlepost(self, post="", subject="", error=""):
+    	self.render("viewpost.html",post=post, subject=subject, error=error)
 
     def get(self, id):
-    	post=Post.get_by_id(int(id))
-    	if not post:
+
+
+    	p=Post.get_by_id(int(id))
+
+    	if not p:
     		error="There is no post with this id! Please try a different id"
-    		self.render(subject, post, error)
+    		self.render_singlepost(error)
+    	
     	else:
-    		self.render(subject, post)
+    		post=p.post
+    		subject=p.subject
+    		self.render_singlepost(post, subject)
+
 
 
 app = webapp2.WSGIApplication([
