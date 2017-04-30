@@ -45,10 +45,11 @@ class Art(db.Model):
 class MainPage(Handler):
 
 	def render_font(self, title="", art="", error=""):
-		self.render("font.html", title=title, art=art, error=error)
+		arts=db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
+		self.render("font.html", title=title, art=art, error=error, arts=arts)
 
 	def get(self):
-		self.render("font.html")
+		self.render_font("font.html")
 
 	def post(self):
 		# to get the title and art from the request, to validate
@@ -62,6 +63,8 @@ class MainPage(Handler):
 			# and saving it to the data base 
 			a= Art(title= title, art= art)
 			a.put()
+			
+			#redirect to the frontpage to avoid reload message
 			self.redirect("/")
 		else:
 			error="we need both a title and some artwork!"
