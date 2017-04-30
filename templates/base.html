@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>/ascii/</title>
+		<title>Blog</title>
 	</head>
 
 	<body>
@@ -45,16 +45,16 @@
 			margin:20px auto;
 		}
 
-		.art+.art{
+		.post+.post{
 			margin-top: 20px;
 		}
 
-		.art-title{
+		.post-subject{
 			font-weight: bold;
 			font-size: 20px;
 		}
 
-		.art-body{
+		.post-body{
 			margin: 0;
 			font-size: 17px;
 
@@ -62,31 +62,9 @@
 
 		</style>
 
-		<h1> /Ascii/ </h1>
-		<form method="post">
-			<label>
-				<div>title</div>
-				<input type="text" name="title" value="{{title}}">
-			</label>
+		{% block content %}
+		{% endblock %}
 
-			<label>
-				<div>art</div>
-				<textarea name="art">{{art}}</textarea>
-			</label>
-			<br>
-			<input type="submit">
-			<div class="error">{{error}}</div>
-		</form>
-
-		<hr>
-		{% for art in arts %}
-		<div class="art">
-			<div class="art-title">{{art.title}}</div>
-			<pre class="art-body">{{art.art}}</pre>
-		
-		{% endfor %}		
-			</pre>
-		</div>
 
 	</body>
 </html>
