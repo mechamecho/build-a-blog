@@ -49,7 +49,7 @@ class MainPage(Handler):
 		self.render("font.html", title=title, art=art, error=error, arts=arts)
 
 	def get(self):
-		self.render_font("font.html")
+		self.render_font()
 
 	def post(self):
 		# to get the title and art from the request, to validate
