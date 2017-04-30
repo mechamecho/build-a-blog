@@ -45,7 +45,7 @@ class Post(db.Model):
 class MainPage(Handler):
 
 	def render_front(self, title="", post="", error=""):
-		posts=db.GqlQuery("SELECT * FROM post ORDER BY created DESC")
+		posts=db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")
 		self.render("front.html", title=title, post=post, error=error, posts=posts)
 
 	def get(self):
