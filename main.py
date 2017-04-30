@@ -97,7 +97,7 @@ class ViewPostHandler(Handler):
     	p=Post.get_by_id(int(id))
 
     	if not p:
-    		error="There is no post with this id! Please try a different id"
+    		error="There is no post with this id! Please try a different id :)"
     		self.render_singlepost(error)
     	
     	else:
