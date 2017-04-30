@@ -44,12 +44,23 @@ class Post(db.Model):
 
 class MainPage(Handler):
 
-	def render_front(self, subject="", post="", error=""):
-		posts=db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")
-		self.render("front.html", subject=subject, post=post, error=error, posts=posts)
+	def render_front(self):
+		posts=db.GqlQuery("SELECT * FROM Post ORDER BY created DESC LIMIT 5")
+		self.render("front.html", posts=posts)
 
 	def get(self):
 		self.render_front()
+
+	
+
+
+class NewPostHandler(Handler):
+
+	def render_newpost(self, subject="", post="", error=""):
+		self.render("newpost.html", subject=subject, post=post, error=error)
+
+	def get(self):
+		self.render_newpost()
 
 	def post(self):
 		# to get the subject and post from the request, to validate
@@ -68,8 +79,10 @@ class MainPage(Handler):
 			self.redirect("/blog")
 		else:
 			error="we need both a subject and some postwork!"
-			self.render_front(subject, post, error)
+			self.render_newpost(subject, post, error)
+
 
 app = webapp2.WSGIApplication([
-    ('/blog', MainPage)
+    ('/blog', MainPage),
+    ('/blog/newpost', NewPostHandler)
 ], debug=True)
