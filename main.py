@@ -61,7 +61,7 @@ class MainPage(Handler):
 		if subject and post:
 			#creating a new post instance with the user input 
 			# and saving it to the data base 
-			a= post(subject= subject, post= post)
+			a= Post(subject= subject, post= post)
 			a.put()
 			
 			#redirect to the frontpage to avoid reload message
