@@ -20,7 +20,8 @@ from google.appengine.ext import db
 
 # set up jinja
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
-jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir))
+jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), 
+								autoescape=True)
 
 
 class Handler(webapp2.RequestHandler):
@@ -84,7 +85,7 @@ class NewPostHandler(Handler):
 			id=str(a.key().id())
 			self.redirect(id)
 		else:
-			error="we need both a subject and some postwork!"
+			error="we need both a subject and a blog post!"
 			self.render_newpost(subject, post, error)
 
 
