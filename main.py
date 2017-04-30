@@ -58,7 +58,11 @@ class MainPage(Handler):
 		#checking if one of the fields was left empty, to 
 		#render the form again
 		if title and art:
-			self.write("thanks!")
+			#creating a new Art instance with the user input 
+			# and saving it to the data base 
+			a= Art(title= title, art= art)
+			a.put()
+			self.redirect("/")
 		else:
 			error="we need both a title and some artwork!"
 			self.render_font(title, art, error)
