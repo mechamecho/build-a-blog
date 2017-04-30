@@ -81,7 +81,8 @@ class NewPostHandler(Handler):
 			a.put()
 			
 			#redirect to the frontpage to avoid reload message
-			self.redirect("/blog")
+			id=str(a.key().id())
+			self.redirect(id)
 		else:
 			error="we need both a subject and some postwork!"
 			self.render_newpost(subject, post, error)
