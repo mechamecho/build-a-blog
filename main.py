@@ -65,11 +65,11 @@ class MainPage(Handler):
 			a.put()
 			
 			#redirect to the frontpage to avoid reload message
-			self.redirect("/")
+			self.redirect("/blog")
 		else:
 			error="we need both a subject and some postwork!"
 			self.render_front(subject, post, error)
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage)
+    ('/blog', MainPage)
 ], debug=True)
