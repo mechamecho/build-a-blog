@@ -55,7 +55,7 @@ class MainPage(Handler):
 			self.write("thanks!")
 		else:
 			error="we need both a title and some artwork!"
-			self.render_font(title=title, art=art, error=error)
+			self.render_font(title, art, error)
 
 app = webapp2.WSGIApplication([
     ('/', MainPage)
