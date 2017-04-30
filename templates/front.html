@@ -45,16 +45,16 @@
 			margin:20px auto;
 		}
 
-		.art+.art{
+		.post+.post{
 			margin-top: 20px;
 		}
 
-		.art-title{
+		.post-title{
 			font-weight: bold;
 			font-size: 20px;
 		}
 
-		.art-body{
+		.post-body{
 			margin: 0;
 			font-size: 17px;
 
@@ -70,8 +70,8 @@
 			</label>
 
 			<label>
-				<div>art</div>
-				<textarea name="art">{{art}}</textarea>
+				<div>post</div>
+				<textarea name="post">{{post}}</textarea>
 			</label>
 			<br>
 			<input type="submit">
@@ -79,10 +79,10 @@
 		</form>
 
 		<hr>
-		{% for art in arts %}
-		<div class="art">
-			<div class="art-title">{{art.title}}</div>
-			<div class="art-body">{{art.art}}</div>
+		{% for post in posts %}
+		<div class="post">
+			<div class="post-title">{{post.title}}</div>
+			<div class="post-body">{{post.post}}</div>
 		
 		{% endfor %}		
 			
