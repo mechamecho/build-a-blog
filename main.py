@@ -82,7 +82,21 @@ class NewPostHandler(Handler):
 			self.render_newpost(subject, post, error)
 
 
+class ViewPostHandler(webapp2.RequestHandler):
+    def render_singlepost(self, subject="", post="", error=""):
+    	self.render("template.html",subject=subject, post=post, error=error)
+
+    def get(self, id):
+    	post=Post.get_by_id(int(id))
+    	if not post:
+    		error="There is no post with this id! Please try a different id"
+    		self.render(subject, post, error)
+    	else:
+    		self.render(subject, post)
+
+
 app = webapp2.WSGIApplication([
     ('/blog', MainPage),
-    ('/blog/newpost', NewPostHandler)
+    ('/blog/newpost', NewPostHandler),
+    webapp2.Route('/blog/<id:\d+>', ViewPostHandler)
 ], debug=True)
