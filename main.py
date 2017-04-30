@@ -38,9 +38,24 @@ class Handler(webapp2.RequestHandler):
 
 class MainPage(Handler):
 
+	def render_font(self, title="", art="", error=""):
+		self.render("font.html", title=title, art=art, error=error)
+
 	def get(self):
 		self.render("font.html")
 
+	def post(self):
+		# to get the title and art from the request, to validate
+		title=self.request.get("title")
+		art=self.request.get("art")
+
+		#checking if one of the fields was left empty, to 
+		#render the form again
+		if title and art:
+			self.write("thanks!")
+		else:
+			error="we need both a title and some artwork!"
+			self.render_font(title=title, art=art, error=error)
 
 app = webapp2.WSGIApplication([
     ('/', MainPage)
