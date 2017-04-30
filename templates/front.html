@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>Blog</title>
+		<subject>Blog</subject>
 	</head>
 
 	<body>
@@ -49,7 +49,7 @@
 			margin-top: 20px;
 		}
 
-		.post-title{
+		.post-subject{
 			font-weight: bold;
 			font-size: 20px;
 		}
@@ -65,8 +65,8 @@
 		<h1> Blog </h1>
 		<form method="post">
 			<label>
-				<div>title</div>
-				<input type="text" name="title" value="{{title}}">
+				<div>subject</div>
+				<input type="text" name="subject" value="{{subject}}">
 			</label>
 
 			<label>
@@ -81,7 +81,7 @@
 		<hr>
 		{% for post in posts %}
 		<div class="post">
-			<div class="post-title">{{post.title}}</div>
+			<div class="post-subject">{{post.subject}}</div>
 			<div class="post-body">{{post.post}}</div>
 		
 		{% endfor %}		

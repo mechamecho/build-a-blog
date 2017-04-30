@@ -37,38 +37,38 @@ class Handler(webapp2.RequestHandler):
 
 #creating an entity called post for the database
 class Post(db.Model):
-	title=db.StringProperty(required = True)
+	subject=db.StringProperty(required = True)
 	post=db.TextProperty(required = True)
 	created=db.DateTimeProperty(auto_now_add = True)
 
 
 class MainPage(Handler):
 
-	def render_front(self, title="", post="", error=""):
+	def render_front(self, subject="", post="", error=""):
 		posts=db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")
-		self.render("front.html", title=title, post=post, error=error, posts=posts)
+		self.render("front.html", subject=subject, post=post, error=error, posts=posts)
 
 	def get(self):
 		self.render_front()
 
 	def post(self):
-		# to get the title and post from the request, to validate
-		title=self.request.get("title")
+		# to get the subject and post from the request, to validate
+		subject=self.request.get("subject")
 		post=self.request.get("post")
 
 		#checking if one of the fields was left empty, to 
 		#render the form again
-		if title and post:
+		if subject and post:
 			#creating a new post instance with the user input 
 			# and saving it to the data base 
-			a= post(title= title, post= post)
+			a= post(subject= subject, post= post)
 			a.put()
 			
 			#redirect to the frontpage to avoid reload message
 			self.redirect("/")
 		else:
-			error="we need both a title and some postwork!"
-			self.render_front(title, post, error)
+			error="we need both a subject and some postwork!"
+			self.render_front(subject, post, error)
 
 app = webapp2.WSGIApplication([
     ('/', MainPage)
