@@ -35,6 +35,12 @@ class Handler(webapp2.RequestHandler):
     def render(self, template, **kw):
     	self.write(self.render_str(template, **kw))
 
+#creating an entity called art for the database
+class Art(db.Model):
+	title=db.StringProperty(required = True)
+	art=db.TextProperty(required = True)
+	created=db.DateTimeProperty(auto_now_add = True)
+
 
 class MainPage(Handler):
 
