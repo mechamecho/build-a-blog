@@ -44,12 +44,12 @@ class Art(db.Model):
 
 class MainPage(Handler):
 
-	def render_font(self, title="", art="", error=""):
+	def render_front(self, title="", art="", error=""):
 		arts=db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
-		self.render("font.html", title=title, art=art, error=error, arts=arts)
+		self.render("front.html", title=title, art=art, error=error, arts=arts)
 
 	def get(self):
-		self.render_font()
+		self.render_front()
 
 	def post(self):
 		# to get the title and art from the request, to validate
@@ -68,7 +68,7 @@ class MainPage(Handler):
 			self.redirect("/")
 		else:
 			error="we need both a title and some artwork!"
-			self.render_font(title, art, error)
+			self.render_front(title, art, error)
 
 app = webapp2.WSGIApplication([
     ('/', MainPage)
